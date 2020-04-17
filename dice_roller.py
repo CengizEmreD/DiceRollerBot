@@ -26,8 +26,10 @@ def DiceRoller():
     async def on_message(message):
 
         # Get user name
-        id = message.author.id   
+        id = message.author.id
         name = message.server.get_member(id).nick
+        if name == None:
+            name = message.server.get_member(id).name
 
         # Get message content
         content = message.content
@@ -53,6 +55,10 @@ def DiceRoller():
         elif message.content.startswith('!roll help'):
             msg = 'Commands:\n+ !rollf: Rolls 4df\n+ !roll <n>d<k>: Rolls k sided die n times. ex: !roll 2d5\n'
             await client.send_message(message.channel, msg)
+        elif message.content.startswith('!roll rick'):
+                # Need Rythm bot for this
+                msg = '!p https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                await client.send_message(message.channel, msg)
         elif message.content.startswith('!roll'):
             try:
                 die = content.split(' ')[1].split('d') # Getting die information
@@ -62,6 +68,7 @@ def DiceRoller():
             except:
                 await client.send_message(message.channel, 'Invalid roll.')
                 return
+
 
     @client.event
     async def on_ready():
