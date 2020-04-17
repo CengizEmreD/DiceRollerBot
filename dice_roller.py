@@ -8,7 +8,7 @@ def roll(die):
     result = [random.randint(1,int(die[1])) for i in range(int(die[0]))]
     return result + [sum(result)]
 
-def unroll_array(arr):
+def array2str(arr):
     st = ''
     for value in arr:
         st += f' [{value}] '
@@ -45,7 +45,7 @@ def DiceRoller():
                         res += 1
                     elif i == '-':
                         res -= 1
-                msg = f'{name} rolled {res} ({unroll_array(result)}).'
+                msg = f'{name} rolled {res} ({array2str(result)}).'
                 await client.send_message(message.channel, msg)
             except:
                 await client.send_message(message.channel, 'Invalid roll.')
@@ -57,7 +57,7 @@ def DiceRoller():
             try:
                 die = content.split(' ')[1].split('d') # Getting die information
                 result = roll(die)
-                msg = f'{name} rolled {result[-1]} ({unroll_array(result[:-1])}).'
+                msg = f'{name} rolled {result[-1]} ({array2str(result[:-1])}).'
                 await client.send_message(message.channel, msg)
             except:
                 await client.send_message(message.channel, 'Invalid roll.')
